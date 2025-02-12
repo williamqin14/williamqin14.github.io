@@ -68,8 +68,8 @@ function sitemapFactory() {
     });
   }
   
-  if (program.ignore) {
-    const ignoreSet = program.ignore;
+  if (program.blacklist) {
+    const ignoreSet = program.blacklist;
     
     // Filter out blacklisted urls during discovery phase
     generator.getCrawler().discoverResources = function (buffer, queueItem) {
