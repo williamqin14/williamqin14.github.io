@@ -1,0 +1,40 @@
+name: Generate xml sitemap
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sitemap_job:
+    runs-on: ubuntu-latest
+    name: Generate a sitemap
+
+    steps:
+    - name: Checkout the repo
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 
+        
+    - name: Set up Node.js
+      uses: actions/setup-node@v4.2.0
+
+    - name: Install dependencies
+      run: npm ci # Installs original version from package.json
+
+    - name: Run tests
+      run: npx jest index.test.js
+
+    - name: Generate sitemap
+      run: node index.js -r https://www.cgu.edu -i https://www.cgu.edu/events,https://www.cgu.edu/event
+
+    - name: Commit generated sitemap
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add sitemap.xml
+        git commit -m "Add generated sitemap"
+        git push
+
+  

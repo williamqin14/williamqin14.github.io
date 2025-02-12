@@ -1,0 +1,47 @@
+{
+  "name": "sitemap-generator-cli",
+  "version": "7.5.0",
+  "description": "Create xml sitemaps from the command line.",
+  "homepage": "https://github.com/lgraubner/sitemap-generator-cli",
+  "author": {
+    "name": "Lars Graubner",
+    "email": "mail@larsgraubner.de",
+    "url": "http://larsgraubner.de"
+  },
+  "keywords": [
+    "sitemap",
+    "xml",
+    "sitemap.xml",
+    "generator",
+    "crawler",
+    "seo",
+    "google",
+    "ecosystem:node"
+  ],
+  "main": "index.js",
+  "dependencies": {
+    "chalk": "2.4.1",
+    "commander": "2.19.0",
+    "sitemap-generator": "8.4.0",
+    "http-proxy-agent": "4.0.1",
+    "https-proxy-agent": "5.0.0"
+  },
+  "devDependencies": {
+    "execa": "1.0.0",
+    "jest": "23.6.0"
+  },
+  "preferGlobal": true,
+  "engines": {
+    "node": ">=6"
+  },
+  "bin": {
+    "sitemap-generator": "index.js"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
