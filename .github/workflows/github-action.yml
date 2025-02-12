@@ -27,7 +27,7 @@ jobs:
       run: npx jest index.test.js
 
     - name: Generate sitemap
-      run: node index.js -r https://www.cgu.edu -b https://www.cgu.edu/events,https://www.cgu.edu/event
+      run: node index.js https://www.cgu.edu -r -v -b https://www.cgu.edu/events,https://www.cgu.edu/event
 
     - name: Commit generated sitemap
       run: |
