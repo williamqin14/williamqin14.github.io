@@ -2,9 +2,9 @@ const execa = require('execa');
 const fs = require('fs');
 
 afterEach(done => {
-  fs.access('sitemap.xml', err => {
+  fs.access('test-sitemap.xml', err => {
     if (!err) {
-      fs.unlink('sitemap.xml', done);
+      fs.unlink('test-sitemap.xml', done);
     }
   });
 });
@@ -12,9 +12,9 @@ afterEach(done => {
 test('should create sitemap file', () => {
   expect.assertions(1);
 
-  return execa('node', ['index.js', 'http://example.com', 'sitemap.xml']).then(
+  return execa('node', ['index.js', 'http://example.com', 'test-sitemap.xml']).then(
     () => {
-      expect(() => fs.accessSync('sitemap.xml')).not.toThrow();
+      expect(() => fs.accessSync('test-sitemap.xml')).not.toThrow();
     }
   );
 }, 20000);
@@ -25,7 +25,7 @@ test('should write to stdout in verbose mode', () => {
   return execa('node', [
     'index.js',
     'http://example.com',
-    'sitemap.xml',
+    'test-sitemap.xml',
     '--verbose'
   ]).then(result => {
     expect(result.stdout).not.toBe('');
@@ -36,10 +36,10 @@ test('should adds last-mod header to xml', () => {
   return execa('node', [
     'index.js',
     'http://example.com',
-    'sitemap.xml',
+    'test-sitemap.xml',
     '--last-mod'
   ]).then(() => {
-    fs.readFile('sitemap.xml', 'utf8', (err, data) => {
+    fs.readFile('test-sitemap.xml', 'utf8', (err, data) => {
       if (err) throw err;
       expect(data).toContain('<lastmod>');
     });
@@ -50,10 +50,10 @@ test('should ignore specified subdirectory', () => {
   return execa('node', [
     'index.js',
     'https://rowlandmusicschool.com',
-    'sitemap.xml',
+    'test-sitemap.xml',
     '-b=https://rowlandmusicschool.com/contact-us'
   ]).then(() => {
-    fs.readFile('sitemap.xml', 'utf8', (err, data) => {
+    fs.readFile('test-sitemap.xml', 'utf8', (err, data) => {
       if (err) throw err;
       expect(data).not.toContain('https://rowlandmusicschool.com/contact-us');
     });
