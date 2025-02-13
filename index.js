@@ -102,6 +102,7 @@ function sitemapFactory() {
 
     generator.on('error', error => {
       errored += 1;
+      console.log(error)
       console.error('[', chalk.red('ERR'), ']', chalk.gray(error.url, ` (${error.code})`));
     });
 
